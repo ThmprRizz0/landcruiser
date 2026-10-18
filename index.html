@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="A retro field guide to the seven Land Cruiser series Australians love most, from the 40 to the 300.">
+<title>Cruiser Country</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,400..900,0..100,0..1&family=Jost:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a 1970s dealer brochure. Stripe-banded hero, then one horizontal "plate" per series, a spec sheet and a glossary. */
+:root {
+  --paper: #f2e2bf;
+  --paper-2: #e9d4a6;
+  --ink: #3a2412;
+  --ink-soft: #6a4a2b;
+  --rule: rgba(58, 36, 18, .22);
+  --plate: #e6cb95;
+  --sun: #e9ad3c;
+  --mustard: #e2a632;
+  --orange: #d6621d;
+  --rust: #a3361b;
+  --display: "Fraunces", "Cooper Black", "Georgia", serif;
+  --body: "Jost", "Futura", "Century Gothic", "Trebuchet MS", sans-serif;
+  --mono: "IBM Plex Mono", "Consolas", "Courier New", monospace;
+  --step-0: 1.0625rem;
+  --step-1: 1.3rem;
+  --step-2: 1.75rem;
+  --step-3: clamp(2rem, 4vw, 2.8rem);
+  --step-4: clamp(3rem, 9vw, 6.4rem);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --paper: #23160c;
+    --paper-2: #2e1e11;
+    --ink: #f1dfbb;
+    --ink-soft: #cdb085;
+    --rule: rgba(241, 223, 187, .2);
+    --plate: #c9a670;
+    --sun: #e9ad3c;
+    --mustard: #ebb547;
+    --orange: #e8772f;
+    --rust: #cf5430;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #23160c;
+  --paper-2: #2e1e11;
+  --ink: #f1dfbb;
+  --ink-soft: #cdb085;
+  --rule: rgba(241, 223, 187, .2);
+  --plate: #c9a670;
+  --sun: #e9ad3c;
+  --mustard: #ebb547;
+  --orange: #e8772f;
+  --rust: #cf5430;
+}
+
+* { box-sizing: border-box; }
+html { padding-block: env(safe-area-inset-top, 0px) env(safe-area-inset-bottom, 0px); }
+img { max-width: 100%; }
+[hidden] { display: none !important; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: var(--step-0);
+  line-height: 1.6;
+}
+.wrap {
+  max-width: 1120px;
+  margin-inline: auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+h1, h2, h3 {
+  font-family: var(--display);
+  font-variation-settings: "SOFT" 100, "WONK" 1;
+  line-height: 1.02;
+  text-wrap: balance;
+  margin: 0;
+}
+p { margin: 0; }
+.eyebrow {
+  font-family: var(--body);
+  font-weight: 600;
+  font-size: .8rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+/* Stripes: the three-band 70s decal */
+.stripes { display: grid; gap: 5px; }
+.stripes span { display: block; height: 14px; transform-origin: left; }
+.stripes span:nth-child(1) { background: var(--mustard); }
+.stripes span:nth-child(2) { background: var(--orange); }
+.stripes span:nth-child(3) { background: var(--rust); }
+@media (prefers-reduced-motion: no-preference) {
+  .stripes span { animation: run 1.1s cubic-bezier(.2,.7,.2,1) both; }
+  .stripes span:nth-child(2) { animation-delay: .12s; }
+  .stripes span:nth-child(3) { animation-delay: .24s; }
+}
+@keyframes run { from { transform: scaleX(.15); } to { transform: scaleX(1); } }
+
+/* Hero */
+.hero { padding-block: 56px 0; }
+.hero-grid {
+  display: grid;
+  gap: 32px;
+  align-items: end;
+}
+@media (min-width: 880px) { .hero-grid { grid-template-columns: 1.05fr 1fr; } }
+.hero h1 {
+  font-size: var(--step-4);
+  font-weight: 900;
+  letter-spacing: -.02em;
+}
+.hero h1 em {
+  font-style: normal;
+  color: var(--orange);
+  display: block;
+}
+.hero-copy { display: grid; gap: 22px; padding-bottom: 28px; }
+.lede { font-size: var(--step-1); line-height: 1.5; max-width: 34ch; color: var(--ink-soft); }
+.hero-truck svg { display: block; width: 100%; height: auto; max-width: 100%; margin-bottom: -6px; }
+.hero .stripes { margin-top: 0; }
+
+/* Sections */
+section { padding-block: 72px; }
+.section-head { display: grid; gap: 10px; margin-bottom: 36px; max-width: 62ch; }
+.section-head h2 { font-size: var(--step-3); font-weight: 800; }
+.section-head p { color: var(--ink-soft); }
+
+/* Origins */
+.origins { display: grid; gap: 40px; }
+@media (min-width: 880px) { .origins { grid-template-columns: 1.2fr 1fr; } }
+.origins .story { display: grid; gap: 18px; max-width: 62ch; }
+.origins .story p:first-child::first-letter {
+  font-family: var(--display);
+  font-variation-settings: "SOFT" 100;
+  font-weight: 900;
+  float: left;
+  font-size: 3.6em;
+  line-height: .85;
+  padding: 6px 10px 0 0;
+  color: var(--rust);
+}
+.dates { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; border-top: 2px solid var(--ink); }
+.dates li {
+  display: grid;
+  grid-template-columns: 4.5rem 1fr;
+  gap: 16px;
+  padding-block: 14px;
+  border-bottom: 1px solid var(--rule);
+}
+.dates b {
+  font-family: var(--mono);
+  font-weight: 500;
+  color: var(--orange);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Lineage */
+.lineage { background: var(--paper-2); }
+.series-list { display: grid; gap: 28px; }
+.series {
+  display: grid;
+  gap: 24px;
+  padding-block: 28px;
+  border-top: 2px solid var(--ink);
+}
+@media (min-width: 820px) {
+  .series { grid-template-columns: minmax(280px, 400px) 1fr; gap: 40px; }
+}
+.plate {
+  background: var(--plate);
+  border-radius: 8px;
+  overflow: hidden;
+  align-self: start;
+}
+.plate svg { display: block; width: 100%; height: auto; }
+.series-body { display: grid; gap: 14px; align-content: start; }
+.series-title { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+.badge {
+  width: 68px; height: 68px;
+  flex: none;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--ink);
+  color: var(--paper);
+  box-shadow: inset 0 0 0 3px var(--ink), inset 0 0 0 5px var(--paper);
+  font-family: var(--display);
+  font-variation-settings: "SOFT" 100;
+  font-weight: 900;
+  font-size: 1.6rem;
+}
+.series h3 { font-size: var(--step-2); font-weight: 800; }
+.series .years {
+  font-family: var(--mono);
+  font-size: .9rem;
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+}
+.series .codes { font-family: var(--mono); font-size: .85rem; color: var(--orange); }
+.series p.blurb { max-width: 60ch; }
+.specs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 0 24px;
+  margin: 6px 0 0;
+}
+.specs div { padding-block: 10px; border-top: 1px solid var(--rule); display: grid; gap: 2px; }
+.specs dt { font-size: .75rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 600; color: var(--ink-soft); }
+.specs dd { margin: 0; font-family: var(--mono); font-size: .92rem; font-variant-numeric: tabular-nums; }
+
+/* Spec sheet */
+.sheet-head { display: flex; justify-content: space-between; align-items: end; gap: 20px; flex-wrap: wrap; margin-bottom: 24px; }
+.sheet-head .section-head { margin-bottom: 0; }
+.units { display: inline-flex; border: 2px solid var(--ink); border-radius: 999px; padding: 3px; gap: 3px; }
+.units button {
+  font: 600 .85rem/1 var(--body);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  border: 0;
+  border-radius: 999px;
+  padding: 9px 16px;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+}
+.units button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.units button:focus-visible, a:focus-visible { outline: 3px solid var(--orange); outline-offset: 2px; }
+.table-scroll { overflow-x: auto; }
+table { width: 100%; min-width: 760px; border-collapse: collapse; font-size: .95rem; }
+th, td { text-align: left; padding: 12px 14px 12px 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+thead th {
+  font-size: .75rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 600;
+  color: var(--ink-soft); border-bottom: 2px solid var(--ink);
+}
+tbody th { font-family: var(--display); font-variation-settings: "SOFT" 100; font-weight: 800; font-size: 1.1rem; white-space: nowrap; }
+td.num, td.mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+td.num { white-space: nowrap; }
+.footnote { margin-top: 16px; font-size: .9rem; color: var(--ink-soft); max-width: 70ch; }
+
+/* Glossary */
+.lore { background: var(--paper-2); }
+.terms {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 0 40px;
+  margin: 0;
+}
+.terms div { padding-block: 20px; border-top: 2px solid var(--ink); display: grid; gap: 6px; }
+.terms dt { font-family: var(--display); font-variation-settings: "SOFT" 100; font-weight: 800; font-size: var(--step-1); }
+.terms dd { margin: 0; color: var(--ink-soft); }
+
+footer { padding-block: 0 40px; }
+footer .stripes { margin-bottom: 28px; }
+footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: .9rem; color: var(--ink-soft); }
+footer strong { font-family: var(--display); font-variation-settings: "SOFT" 100; font-weight: 800; color: var(--ink); font-size: 1.05rem; }
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow">A field guide for Cruiser people · In Australia since 1958</p>
+      <h1>Land Cruiser <em>Country</em></h1>
+      <p class="lede">Seven generations of Toyota's toughest four-wheel drive, from the canvas-topped 40 to the twin-turbo 300. These are the Cruisers Australians have driven to the Cape, across the Simpson and down every station track in between.</p>
+    </div>
+    <div class="hero-truck" data-truck="70" data-hero="1"></div>
+  </div>
+  <div class="stripes" aria-hidden="true"><span></span><span></span><span></span></div>
+</header>
+
+<main>
+  <section>
+    <div class="wrap origins">
+      <div class="story">
+        <p>The first Land Cruisers in Australia were working trucks. In 1958 the construction firm Thiess Brothers brought FJ25s in for the Snowy Mountains Hydro-Electric Scheme, where they carried crews and gear through alpine country that broke lesser vehicles.</p>
+        <p>Word got around. Graziers, miners, surveyors and the Flying Doctor followed, and Australia grew into one of the Land Cruiser's biggest markets anywhere. Six decades on, a Cruiser with a snorkel and a roof rack is as much a part of the outback as the road trains and the red dust.</p>
+        <p>This page covers the seven series that matter most here. Each one is drawn below in its most familiar Australian form.</p>
+      </div>
+      <ol class="dates" aria-label="Key dates">
+        <li><b>1951</b><span>Toyota's BJ prototype climbs to the sixth station of Mount Fuji, higher than any vehicle before it.</span></li>
+        <li><b>1954</b><span>The BJ is renamed Land Cruiser.</span></li>
+        <li><b>1958</b><span>First Land Cruisers arrive in Australia for the Snowy Mountains Scheme.</span></li>
+        <li><b>1984</b><span>The 70 Series launches. It is still in production more than 40 years later.</span></li>
+        <li><b>2021</b><span>The 300 Series replaces the 200, with a twin-turbo V6 diesel.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="lineage" id="lineage">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">The lineage</p>
+        <h2>Seven series, oldest first</h2>
+        <p>Engines shown are a common Australian-market choice for each series. Most generations offered several.</p>
+      </div>
+      <div class="series-list" id="series-list"></div>
+    </div>
+  </section>
+
+  <section id="specs">
+    <div class="wrap">
+      <div class="sheet-head">
+        <div class="section-head">
+          <p class="eyebrow">Spec sheet</p>
+          <h2>Side by side</h2>
+        </div>
+        <div class="units" role="group" aria-label="Power units">
+          <button type="button" id="unit-kw" aria-pressed="true">kW</button>
+          <button type="button" id="unit-hp" aria-pressed="false">hp</button>
+        </div>
+      </div>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>Series</th><th>Built</th><th>Engine shown</th><th>Power</th><th>Torque</th><th>Front end</th><th>Bodies sold here</th></tr>
+          </thead>
+          <tbody id="spec-rows"></tbody>
+        </table>
+      </div>
+      <p class="footnote">Figures are approximate and changed with model year and market. The 70 Series V8 figure is for the 2007 to 2016 manual.</p>
+    </div>
+  </section>
+
+  <section class="lore">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Campfire vocabulary</p>
+        <h2>Words you'll hear at the campground</h2>
+      </div>
+      <dl class="terms">
+        <div><dt>Troopy</dt><dd>The 70 Series Troop Carrier. A tall-roofed wagon that holds a bed, a fridge and a water tank, which is why so many end up as touring campers.</dd></div>
+        <div><dt>1HZ</dt><dd>The non-turbo 4.2 litre six-cylinder diesel in 80s, 105s and 70s. Slow, simple and known for running well past a million kilometres.</dd></div>
+        <div><dt>The 105</dt><dd>The workhorse 100 Series. It kept a solid front axle and the 1HZ when the flagship moved to independent front suspension, so tourers sought it out.</dd></div>
+        <div><dt>Snorkel</dt><dd>A raised air intake up the A-pillar. It pulls cleaner air above the dust and keeps water out of the engine on river crossings.</dd></div>
+        <div><dt>KDSS</dt><dd>Kinetic Dynamic Suspension System. It stiffens the sway bars on the road and frees them off-road for more wheel travel. Optional on 200 Series.</dd></div>
+        <div><dt>Sahara</dt><dd>The top-spec wagon, with leather, the extra gadgets and the bigger price. GXL sits below it and is the touring favourite.</dd></div>
+      </dl>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="stripes" aria-hidden="true"><span></span><span></span><span></span></div>
+  <div class="wrap">
+    <strong>Cruiser Country</strong>
+    <span>A fan page. Not affiliated with or endorsed by Toyota.</span>
+  </div>
+</footer>
+
+<script>
+const SERIES = [
+  { id: "40", name: "40 Series", years: "1960 – 1984", codes: "FJ40 · BJ40 · HJ47",
+    blurb: "The one that made the name here. Short, square and built on leaf springs at every corner. The steel body usually rusted out long before the mechanicals gave up, and restored FJ40s now sell for serious money.",
+    engine: "2F 4.2 L petrol six", kw: 100, nm: 290, front: "Leaf springs, solid axle", bodies: "Soft-top, hardtop, cab-chassis",
+    art: { rear: 70, front: 270, hood: 70, belt: 78, sill: 112, roof: 40, ws: 6, rs: 0, r: 19, wr: 110, wf: 236, rtl: 3, rtr: 5, paint: "#6f9fb0", top: "#efe8d6", windows: 2, lamp: "round", spare: true } },
+  { id: "60", name: "60 Series", years: "1980 – 1990", codes: "FJ60 · HJ60 · HJ61",
+    blurb: "The first Cruiser wagon that felt like a family car, with air-conditioning and room for five plus luggage. The HJ61 brought a factory turbo-diesel, and the boxy shape is now a classic in its own right.",
+    engine: "12H-T 4.0 L turbo-diesel six", kw: 100, nm: 315, front: "Leaf springs, solid axle", bodies: "Wagon",
+    art: { rear: 30, front: 302, hood: 80, belt: 76, sill: 110, roof: 38, ws: 14, rs: 2, r: 18, wr: 86, wf: 246, rtl: 4, rtr: 5, paint: "#c48f4f", windows: 3, lamp: "round", stripe: true, rack: true } },
+  { id: "70", name: "70 Series", years: "1984 – present", codes: "HZJ75 · HZJ78 · VDJ79",
+    blurb: "The working Land Cruiser. Mines, farms, councils and touring couples all run them, in wagon, Troopy and single- or dual-cab ute form. The V8 turbo-diesel arrived in 2007 and the basic design is still being built.",
+    engine: "1VD-FTV 4.5 L V8 turbo-diesel", kw: 151, nm: 430, front: "Coil springs, solid axle (from 1999)", bodies: "Wagon, Troop Carrier, ute",
+    art: { rear: 26, front: 304, hood: 78, belt: 80, sill: 112, roof: 28, ws: 9, rs: 0, r: 19, wr: 82, wf: 250, rtl: 4, rtr: 5, paint: "#ece5d3", windows: 3, lamp: "round", snorkel: true, rack: true } },
+  { id: "80", name: "80 Series", years: "1990 – 1998", codes: "FZJ80 · HZJ80 · HDJ80",
+    blurb: "Many owners will tell you this is the best of them. Coil springs and solid axles at both ends, full-time four-wheel drive, and optional front and rear diff lockers. Good ones still fetch strong prices.",
+    engine: "1HZ 4.2 L diesel six", kw: 96, nm: 285, front: "Coil springs, solid axle", bodies: "Wagon",
+    art: { rear: 30, front: 304, hood: 82, belt: 74, sill: 110, roof: 40, ws: 22, rs: 3, r: 18, wr: 86, wf: 250, rtl: 6, rtr: 13, paint: "#4f6a4a", windows: 3, lamp: "rect", snorkel: true, rack: true } },
+  { id: "100", name: "100 Series", years: "1998 – 2007", codes: "UZJ100 · HDJ100 · HZJ105",
+    blurb: "The first Cruiser with a V8 and independent front suspension, and a big step up in comfort. The 105 kept the old solid axle and the 1HZ, which made it the pick for remote touring.",
+    engine: "2UZ-FE 4.7 L V8 petrol", kw: 170, nm: 410, front: "Independent (105: solid axle)", bodies: "Wagon",
+    art: { rear: 28, front: 306, hood: 86, belt: 74, sill: 110, roof: 42, ws: 24, rs: 4, r: 19, wr: 86, wf: 252, rtl: 7, rtr: 13, paint: "#b5a88f", windows: 3, lamp: "rect" } },
+  { id: "200", name: "200 Series", years: "2007 – 2021", codes: "UZJ200 · URJ202 · VDJ200",
+    blurb: "The twin-turbo V8 diesel made the 200 a towing machine, rated to pull 3,500 kg. It was the big-caravan wagon of its era, and KDSS gave it more wheel travel off-road than its size suggests.",
+    engine: "1VD-FTV 4.5 L twin-turbo V8 diesel", kw: 200, nm: 650, front: "Independent", bodies: "Wagon",
+    art: { rear: 26, front: 308, hood: 90, belt: 72, sill: 108, roof: 42, ws: 28, rs: 5, r: 20, wr: 86, wf: 254, rtl: 8, rtr: 15, paint: "#7b766d", windows: 3, lamp: "rect" } },
+  { id: "300", name: "300 Series", years: "2021 – present", codes: "FJA300",
+    blurb: "A new platform, a 3.3 litre twin-turbo V6 diesel and a ten-speed automatic. It is lighter and quicker than the 200, and it kept the 3,500 kg towing rating that Australian buyers expect.",
+    engine: "F33A-FTV 3.3 L twin-turbo V6 diesel", kw: 227, nm: 700, front: "Independent", bodies: "Wagon",
+    art: { rear: 26, front: 310, hood: 94, belt: 70, sill: 108, roof: 42, ws: 30, rs: 6, r: 20, wr: 86, wf: 256, rtl: 8, rtr: 11, paint: "#8c3424", windows: 3, lamp: "rect" } }
+];
+
+const INK = "#2e1c0e";
+
+function rp(x0, y0, x1, y1, tl, tr, br, bl) {
+  return `M${x0 + tl} ${y0}H${x1 - tr}Q${x1} ${y0} ${x1} ${y0 + tr}V${y1 - br}Q${x1} ${y1} ${x1 - br} ${y1}H${x0 + bl}Q${x0} ${y1} ${x0} ${y1 - bl}V${y0 + tl}Q${x0} ${y0} ${x0 + tl} ${y0}Z`;
+}
+
+function truckSVG(c, label) {
+  const G = 134;
+  const { rear: x0, front: x1, belt: yb, sill: ys, roof: yr, hood, ws, rs = 0, r, wr, wf, rtl, rtr, paint, top = paint, windows = 2, lamp } = c;
+  const cab = x0;
+  const s = [];
+  s.push(`<circle cx="236" cy="58" r="48" fill="var(--sun)" opacity=".55"/>`);
+  s.push(`<ellipse cx="${(x0 + x1) / 2}" cy="${G + 1}" rx="${(x1 - x0) / 2 + 14}" ry="4" fill="${INK}" opacity=".18"/>`);
+  if (c.spare) s.push(`<rect x="${x0 - 10}" y="${yb + 1}" width="11" height="${ys - yb + 2}" rx="4" fill="#2a211b" stroke="${INK}" stroke-width="2"/>`);
+  s.push(`<path d="${rp(x0, yb, x1, ys, rtl, rtr, 6, 6)}" fill="${paint}" stroke="${INK}" stroke-width="2.5"/>`);
+  if (c.stripe) {
+    ["#e2a632", "#d6621d", "#a3361b"].forEach((col, i) => {
+      s.push(`<rect x="${x0 + 4}" y="${yb + 9 + i * 4.5}" width="${x1 - hood * 0.35 - x0 - 4}" height="3.4" fill="${col}"/>`);
+    });
+  }
+  const xw = y => (x1 - hood) - ws * (yb - y) / (yb - yr);
+  const xr = y => cab + rs * (yb - y) / (yb - yr);
+  s.push(`<polygon points="${x1 - hood},${yb} ${x1 - hood - ws},${yr} ${cab + rs},${yr} ${cab},${yb}" fill="${top}" stroke="${INK}" stroke-width="2.5" stroke-linejoin="round"/>`);
+  const ins = 6, gt = yr + ins, gb = yb - 4;
+  const gx = [xw(gb) - ins, xw(gt) - ins, xr(gt) + ins, xr(gb) + ins];
+  s.push(`<polygon points="${gx[0]},${gb} ${gx[1]},${gt} ${gx[2]},${gt} ${gx[3]},${gb}" fill="#9db5b0" stroke="${INK}" stroke-width="1.5" stroke-linejoin="round"/>`);
+  s.push(`<line x1="${gx[1] - 8}" y1="${gt + 4}" x2="${gx[1] - 20}" y2="${gb - 4}" stroke="#e8f0ec" stroke-width="3" opacity=".7"/>`);
+  const left = gx[3], right = gx[0];
+  for (let i = 1; i < windows; i++) {
+    const x = right - (right - left) * i / windows;
+    s.push(`<rect x="${x - 3}" y="${gt - 1}" width="6" height="${gb - gt + 2}" fill="${top}"/>`);
+    s.push(`<line x1="${x}" y1="${yb + 3}" x2="${x}" y2="${ys - 5}" stroke="${INK}" stroke-width="1.2" opacity=".55"/>`);
+  }
+  s.push(`<line x1="${x1 - hood - 2}" y1="${yb + 3}" x2="${x1 - hood - 2}" y2="${ys - 5}" stroke="${INK}" stroke-width="1.2" opacity=".55"/>`);
+  if (c.rack) {
+    const a = cab + rs + 6, b = x1 - hood - ws - 6;
+    s.push(`<rect x="${a}" y="${yr - 9}" width="${b - a}" height="3.5" rx="1" fill="${INK}"/>`);
+    [a + 6, (a + b) / 2, b - 6].forEach(x => s.push(`<rect x="${x - 1.5}" y="${yr - 6}" width="3" height="6" fill="${INK}"/>`));
+  }
+  [wr, wf].forEach(cx => {
+    const cy = G - r, R = r + 5, dy = ys - cy;
+    const dx = Math.sqrt(Math.max(R * R - dy * dy, 0));
+    s.push(`<path d="M${cx - dx} ${ys}A${R} ${R} 0 ${dy > 0 ? 1 : 0} 1 ${cx + dx} ${ys}Z" fill="var(--plate)" stroke="${INK}" stroke-width="2.5"/>`);
+    s.push(`<circle cx="${cx}" cy="${cy}" r="${r}" fill="#2a211b"/>`);
+    s.push(`<circle cx="${cx}" cy="${cy}" r="${r * 0.56}" fill="#d9cdb1" stroke="${INK}" stroke-width="1.5"/>`);
+    s.push(`<circle cx="${cx}" cy="${cy}" r="${r * 0.18}" fill="#857659"/>`);
+  });
+  s.push(`<rect x="${x1 - 4}" y="${ys - 13}" width="10" height="9" rx="2" fill="#3d3833" stroke="${INK}" stroke-width="1.5"/>`);
+  if (!c.spare) s.push(`<rect x="${x0 - 5}" y="${ys - 12}" width="8" height="8" rx="2" fill="#3d3833" stroke="${INK}" stroke-width="1.5"/>`);
+  if (lamp === "round") s.push(`<circle cx="${x1 - 2}" cy="${yb + 10}" r="5" fill="#f4e3a1" stroke="${INK}" stroke-width="1.5"/>`);
+  else s.push(`<rect x="${x1 - 8}" y="${yb + 5}" width="9" height="7" rx="1.5" fill="#f4e3a1" stroke="${INK}" stroke-width="1.5"/>`);
+  if (c.snorkel) {
+    const sx = x1 - hood + 3;
+    s.push(`<rect x="${sx}" y="${yr - 4}" width="5" height="${yb + 12 - yr + 4}" rx="2" fill="#2b2622"/>`);
+    s.push(`<rect x="${sx - 3}" y="${yr - 10}" width="11" height="7" rx="2.5" fill="#2b2622"/>`);
+  }
+  return `<svg viewBox="0 0 340 145" role="img" aria-label="${label}">${s.join("")}</svg>`;
+}
+
+const fmtPower = (kw, unit) => unit === "hp" ? `${Math.round(kw * 1.341)} hp` : `${kw} kW`;
+
+function render(unit) {
+  document.getElementById("series-list").innerHTML = SERIES.map(s => `
+    <article class="series">
+      <div class="plate">${truckSVG(s.art, `Illustration of a ${s.name} Land Cruiser`)}</div>
+      <div class="series-body">
+        <div class="series-title">
+          <div class="badge" aria-hidden="true">${s.id}</div>
+          <div>
+            <h3>${s.name}</h3>
+            <div class="years">${s.years}</div>
+          </div>
+        </div>
+        <div class="codes">${s.codes}</div>
+        <p class="blurb">${s.blurb}</p>
+        <dl class="specs">
+          <div><dt>Engine</dt><dd>${s.engine}</dd></div>
+          <div><dt>Output</dt><dd>~${fmtPower(s.kw, unit)} · ~${s.nm} Nm</dd></div>
+          <div><dt>Front end</dt><dd>${s.front}</dd></div>
+        </dl>
+      </div>
+    </article>`).join("");
+  document.getElementById("spec-rows").innerHTML = SERIES.map(s => `
+    <tr>
+      <th scope="row">${s.name}</th>
+      <td class="num">${s.years.replace(" – ", "–")}</td>
+      <td class="mono">${s.engine}</td>
+      <td class="num">${fmtPower(s.kw, unit)}</td>
+      <td class="num">${s.nm} Nm</td>
+      <td>${s.front}</td>
+      <td>${s.bodies}</td>
+    </tr>`).join("");
+}
+
+document.querySelector("[data-hero]").innerHTML = truckSVG(SERIES[2].art, "Illustration of a 70 Series Troop Carrier with snorkel and roof rack");
+
+let unit = "kW";
+try { unit = localStorage.getItem("cc-unit") || "kW"; } catch (e) {}
+const kwBtn = document.getElementById("unit-kw"), hpBtn = document.getElementById("unit-hp");
+function setUnit(u) {
+  unit = u;
+  kwBtn.setAttribute("aria-pressed", u === "kW");
+  hpBtn.setAttribute("aria-pressed", u === "hp");
+  render(u);
+  try { localStorage.setItem("cc-unit", u); } catch (e) {}
+}
+kwBtn.addEventListener("click", () => setUnit("kW"));
+hpBtn.addEventListener("click", () => setUnit("hp"));
+setUnit(unit);
+</script>
+</body>
+</html>
