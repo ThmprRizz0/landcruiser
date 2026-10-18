@@ -18,6 +18,7 @@
   --ink-soft: #6a4a2b;
   --rule: rgba(58, 36, 18, .22);
   --plate: #e6cb95;
+  --road: rgba(46, 28, 14, .35);
   --sun: #e9ad3c;
   --mustard: #e2a632;
   --orange: #d6621d;
@@ -128,7 +129,7 @@ p { margin: 0; }
 }
 .hero-copy { display: grid; gap: 22px; padding-bottom: 28px; }
 .lede { font-size: var(--step-1); line-height: 1.5; max-width: 34ch; color: var(--ink-soft); }
-.hero-truck { --plate: var(--paper); }
+.hero-truck { --plate: var(--paper); --road: var(--ink-soft); }
 .hero-truck svg { display: block; width: 100%; height: auto; max-width: 100%; margin-bottom: -6px; }
 .hero .stripes { margin-top: 0; }
 
@@ -187,6 +188,23 @@ section { padding-block: 72px; }
 }
 .plate svg { display: block; width: 100%; height: auto; }
 .truck * { vector-effect: non-scaling-stroke; }
+.truck .puff { opacity: 0; }
+@media (prefers-reduced-motion: no-preference) {
+  .truck .wheel { transform-box: fill-box; transform-origin: center; animation: spin var(--spin, 1.7s) linear infinite; }
+  .truck .sprung { animation: bob .9s ease-in-out var(--d, 0s) infinite; }
+  .truck .road { animation: roll var(--roll, .3s) linear infinite; }
+  .truck .puff { transform-box: fill-box; transform-origin: center; animation: puff 1.8s ease-out var(--d, 0s) infinite; }
+  .truck .puff.late { animation-delay: calc(var(--d, 0s) - .9s); }
+  .series:hover .truck, .hero-truck:hover .truck { --spin: .85s; --roll: .15s; }
+}
+/* Wheels and the road share a speed: 24px of dash per .3s matches one turn of a 0.4 m wheel in about 1.7s. */
+@keyframes spin { to { transform: rotate(-360deg); } }
+@keyframes roll { to { stroke-dashoffset: 24; } }
+@keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(.025px); } }
+@keyframes puff {
+  0% { opacity: .6; transform: translate(0, 0) scale(.6); }
+  100% { opacity: 0; transform: translate(-.45px, .14px) scale(1.9); }
+}
 .series-body { display: grid; gap: 14px; align-content: start; }
 .series-title { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
 .badge {
@@ -462,34 +480,51 @@ const MODELS = {
       + Rc(1.66, 0.40, 1.98, 0.07, BLACK, 0.02, 0) + mirror(3.10, 1.42) + handle(2.30, 1.16) + handle(1.54, 1.16) }
 };
 
-function truckSVG(m, label) {
+// The sprung groups bob on the suspension, wheels spin, and the road and exhaust move past.
+function wheel(x, r, rim) {
+  const nuts = [0, 1, 2, 3, 4].map(k => {
+    const a = k * 2 * Math.PI / 5;
+    return Ci((x + r * 0.33 * Math.cos(a)).toFixed(3), (r + r * 0.33 * Math.sin(a)).toFixed(3), r * 0.065, "#7d705a", 0);
+  }).join("");
+  return `<g class="wheel">${Ci(x, r, r, TYRE, 0)}${Ci(x, r, r * 0.56, rim)}${Ci(x, r, r * 0.16, "#7d705a", 0)}${nuts}</g>`;
+}
+
+function truckSVG(m, label, delay = 0) {
   const S = 55, G = 134;
   const [x0, x1] = m.ext;
   const [wr, wf] = m.wheels;
   const ox = ((340 - (x1 - x0) * S) / 2 - x0 * S).toFixed(1);
-  const parts = [
+  const body = [
     D(m.body, m.paint),
     m.under || "",
     m.upper || "",
     ...m.glass.map(d => D(d, GLASS, 1.5)),
     `<path d="${m.lines}" fill="none" stroke="${INK}" stroke-width="1.2" opacity=".55"/>`,
     ...[wr, wf].map(x => Ci(x, m.r, m.arch, "var(--plate)", m.flare ? 0 : 2)
-      + (m.flare ? `<circle cx="${x}" cy="${m.r}" r="${m.arch}" fill="none" stroke="${m.flare}" stroke-width="${m.flareW}"/>` : "")),
+      + (m.flare ? `<circle cx="${x}" cy="${m.r}" r="${m.arch}" fill="none" stroke="${m.flare}" stroke-width="${m.flareW}"/>` : ""))
+  ].join("");
+  const puffY = (m.sill - 0.08).toFixed(2);
+  const ground = [
     Rc(x0 - 1, -0.5, x1 - x0 + 2, m.sill + 0.5, "var(--plate)", 0, 0),
     Rc(wr, m.sill - 0.14, wf - wr, 0.14, "#3a2d22", 0, 0),
     `<ellipse cx="${(x0 + x1) / 2}" cy="0" rx="${(x1 - x0) / 2 + 0.1}" ry="0.06" fill="${INK}" opacity=".18"/>`,
-    ...[wr, wf].map(x => Ci(x, m.r, m.r, TYRE, 0) + Ci(x, m.r, m.r * 0.56, m.rim) + Ci(x, m.r, m.r * 0.16, "#7d705a", 0)),
-    m.after || ""
-  ];
-  return `<svg class="truck" viewBox="0 0 340 145" role="img" aria-label="${label}"><circle cx="255" cy="42" r="34" fill="var(--sun)" opacity=".55"/><g transform="translate(${ox} ${G}) scale(${S} ${-S})">${parts.join("")}</g></svg>`;
+    `<circle class="puff" cx="${x0 - 0.12}" cy="${puffY}" r="0.07" fill="#b9ab94"/>`,
+    `<circle class="puff late" cx="${x0 - 0.12}" cy="${puffY}" r="0.07" fill="#b9ab94"/>`,
+    wheel(wr, m.r, m.rim),
+    wheel(wf, m.r, m.rim)
+  ].join("");
+  return `<svg class="truck" viewBox="0 0 340 145" role="img" aria-label="${label}" style="--d: ${-delay}s">`
+    + `<circle cx="255" cy="42" r="34" fill="var(--sun)" opacity=".55"/>`
+    + `<line class="road" x1="0" y1="140" x2="340" y2="140" stroke="var(--road)" stroke-width="2" stroke-dasharray="14 10"/>`
+    + `<g transform="translate(${ox} ${G}) scale(${S} ${-S})"><g class="sprung">${body}</g>${ground}<g class="sprung">${m.after || ""}</g></g></svg>`;
 }
 
 const fmtPower = (kw, unit) => unit === "hp" ? `${Math.round(kw * 1.341)} hp` : `${kw} kW`;
 
 function render(unit) {
-  document.getElementById("series-list").innerHTML = SERIES.map(s => `
+  document.getElementById("series-list").innerHTML = SERIES.map((s, i) => `
     <article class="series">
-      <div class="plate">${truckSVG(MODELS[s.id], `Illustration of a ${s.name} Land Cruiser`)}</div>
+      <div class="plate">${truckSVG(MODELS[s.id], `Illustration of a ${s.name} Land Cruiser`, i * 0.37)}</div>
       <div class="series-body">
         <div class="series-title">
           <div class="badge${s.id.length > 2 ? " wide" : ""}" aria-hidden="true">${s.id}</div>
