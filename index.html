@@ -128,6 +128,7 @@ p { margin: 0; }
 }
 .hero-copy { display: grid; gap: 22px; padding-bottom: 28px; }
 .lede { font-size: var(--step-1); line-height: 1.5; max-width: 34ch; color: var(--ink-soft); }
+.hero-truck { --plate: var(--paper); }
 .hero-truck svg { display: block; width: 100%; height: auto; max-width: 100%; margin-bottom: -6px; }
 .hero .stripes { margin-top: 0; }
 
@@ -185,6 +186,7 @@ section { padding-block: 72px; }
   align-self: start;
 }
 .plate svg { display: block; width: 100%; height: auto; }
+.truck * { vector-effect: non-scaling-stroke; }
 .series-body { display: grid; gap: 14px; align-content: start; }
 .series-title { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
 .badge {
@@ -201,6 +203,7 @@ section { padding-block: 72px; }
   font-weight: 900;
   font-size: 1.6rem;
 }
+.badge.wide { font-size: 1.2rem; }
 .series h3 { font-size: var(--step-2); font-weight: 800; }
 .series .years {
   font-family: var(--mono);
@@ -363,91 +366,122 @@ footer strong { font-family: var(--display); font-variation-settings: "SOFT" 100
 const SERIES = [
   { id: "40", name: "40 Series", years: "1960 – 1984", codes: "FJ40 · BJ40 · HJ47",
     blurb: "The one that made the name here. Short, square and built on leaf springs at every corner. The steel body usually rusted out long before the mechanicals gave up, and restored FJ40s now sell for serious money.",
-    engine: "2F 4.2 L petrol six", kw: 100, nm: 290, front: "Leaf springs, solid axle", bodies: "Soft-top, hardtop, cab-chassis",
-    art: { rear: 70, front: 270, hood: 70, belt: 78, sill: 112, roof: 40, ws: 6, rs: 0, r: 19, wr: 110, wf: 236, rtl: 3, rtr: 5, paint: "#6f9fb0", top: "#efe8d6", windows: 2, lamp: "round", spare: true } },
+    engine: "2F 4.2 L petrol six", kw: 100, nm: 290, front: "Leaf springs, solid axle", bodies: "Soft-top, hardtop, cab-chassis" },
   { id: "60", name: "60 Series", years: "1980 – 1990", codes: "FJ60 · HJ60 · HJ61",
     blurb: "The first Cruiser wagon that felt like a family car, with air-conditioning and room for five plus luggage. The HJ61 brought a factory turbo-diesel, and the boxy shape is now a classic in its own right.",
-    engine: "12H-T 4.0 L turbo-diesel six", kw: 100, nm: 315, front: "Leaf springs, solid axle", bodies: "Wagon",
-    art: { rear: 30, front: 302, hood: 80, belt: 76, sill: 110, roof: 38, ws: 14, rs: 2, r: 18, wr: 86, wf: 246, rtl: 4, rtr: 5, paint: "#c48f4f", windows: 3, lamp: "round", stripe: true, rack: true } },
+    engine: "12H-T 4.0 L turbo-diesel six", kw: 100, nm: 315, front: "Leaf springs, solid axle", bodies: "Wagon" },
   { id: "70", name: "70 Series", years: "1984 – present", codes: "HZJ75 · HZJ78 · VDJ79",
     blurb: "The working Land Cruiser. Mines, farms, councils and touring couples all run them, in wagon, Troopy and single- or dual-cab ute form. The V8 turbo-diesel arrived in 2007 and the basic design is still being built.",
-    engine: "1VD-FTV 4.5 L V8 turbo-diesel", kw: 151, nm: 430, front: "Coil springs, solid axle (from 1999)", bodies: "Wagon, Troop Carrier, ute",
-    art: { rear: 26, front: 304, hood: 78, belt: 80, sill: 112, roof: 28, ws: 9, rs: 0, r: 19, wr: 82, wf: 250, rtl: 4, rtr: 5, paint: "#ece5d3", windows: 3, lamp: "round", snorkel: true, rack: true } },
+    engine: "1VD-FTV 4.5 L V8 turbo-diesel", kw: 151, nm: 430, front: "Coil springs, solid axle (from 1999)", bodies: "Wagon, Troop Carrier, ute" },
   { id: "80", name: "80 Series", years: "1990 – 1998", codes: "FZJ80 · HZJ80 · HDJ80",
     blurb: "Many owners will tell you this is the best of them. Coil springs and solid axles at both ends, full-time four-wheel drive, and optional front and rear diff lockers. Good ones still fetch strong prices.",
-    engine: "1HZ 4.2 L diesel six", kw: 96, nm: 285, front: "Coil springs, solid axle", bodies: "Wagon",
-    art: { rear: 30, front: 304, hood: 82, belt: 74, sill: 110, roof: 40, ws: 22, rs: 3, r: 18, wr: 86, wf: 250, rtl: 6, rtr: 13, paint: "#4f6a4a", windows: 3, lamp: "rect", snorkel: true, rack: true } },
+    engine: "1HZ 4.2 L diesel six", kw: 96, nm: 285, front: "Coil springs, solid axle", bodies: "Wagon" },
   { id: "100", name: "100 Series", years: "1998 – 2007", codes: "UZJ100 · HDJ100 · HZJ105",
     blurb: "The first Cruiser with a V8 and independent front suspension, and a big step up in comfort. The 105 kept the old solid axle and the 1HZ, which made it the pick for remote touring.",
-    engine: "2UZ-FE 4.7 L V8 petrol", kw: 170, nm: 410, front: "Independent (105: solid axle)", bodies: "Wagon",
-    art: { rear: 28, front: 306, hood: 86, belt: 74, sill: 110, roof: 42, ws: 24, rs: 4, r: 19, wr: 86, wf: 252, rtl: 7, rtr: 13, paint: "#b5a88f", windows: 3, lamp: "rect" } },
+    engine: "2UZ-FE 4.7 L V8 petrol", kw: 170, nm: 410, front: "Independent (105: solid axle)", bodies: "Wagon" },
   { id: "200", name: "200 Series", years: "2007 – 2021", codes: "UZJ200 · URJ202 · VDJ200",
     blurb: "The twin-turbo V8 diesel made the 200 a towing machine, rated to pull 3,500 kg. It was the big-caravan wagon of its era, and KDSS gave it more wheel travel off-road than its size suggests.",
-    engine: "1VD-FTV 4.5 L twin-turbo V8 diesel", kw: 200, nm: 650, front: "Independent", bodies: "Wagon",
-    art: { rear: 26, front: 308, hood: 90, belt: 72, sill: 108, roof: 42, ws: 28, rs: 5, r: 20, wr: 86, wf: 254, rtl: 8, rtr: 15, paint: "#7b766d", windows: 3, lamp: "rect" } },
+    engine: "1VD-FTV 4.5 L twin-turbo V8 diesel", kw: 200, nm: 650, front: "Independent", bodies: "Wagon" },
   { id: "300", name: "300 Series", years: "2021 – present", codes: "FJA300",
     blurb: "A new platform, a 3.3 litre twin-turbo V6 diesel and a ten-speed automatic. It is lighter and quicker than the 200, and it kept the 3,500 kg towing rating that Australian buyers expect.",
-    engine: "F33A-FTV 3.3 L twin-turbo V6 diesel", kw: 227, nm: 700, front: "Independent", bodies: "Wagon",
-    art: { rear: 26, front: 310, hood: 94, belt: 70, sill: 108, roof: 42, ws: 30, rs: 6, r: 20, wr: 86, wf: 256, rtl: 8, rtr: 11, paint: "#8c3424", windows: 3, lamp: "rect" } }
+    engine: "F33A-FTV 3.3 L twin-turbo V6 diesel", kw: 227, nm: 700, front: "Independent", bodies: "Wagon" }
 ];
 
 const INK = "#2e1c0e";
 
-function rp(x0, y0, x1, y1, tl, tr, br, bl) {
-  return `M${x0 + tl} ${y0}H${x1 - tr}Q${x1} ${y0} ${x1} ${y0 + tr}V${y1 - br}Q${x1} ${y1} ${x1 - br} ${y1}H${x0 + bl}Q${x0} ${y1} ${x0} ${y1 - bl}V${y0 + tl}Q${x0} ${y0} ${x0 + tl} ${y0}Z`;
-}
+// Truck drawings are authored in metres (x from the rear bumper, y up from the ground),
+// using each model's real length, height and wheelbase, then scaled to the plate.
+const CHROME = "#d6d1c4", BLACK = "#2b2622", LENS = "#f4e3a1", AMBER = "#e8a33a", GREY = "#8a877e", TYRE = "#2a211b", GLASS = "#8ea8a5";
+const sk = w => w ? `stroke="${INK}" stroke-width="${w}"` : `stroke="none"`;
+const D = (d, fill, w = 2) => `<path d="${d}" fill="${fill}" ${sk(w)} stroke-linejoin="round"/>`;
+const Rc = (x, y, w, h, fill, rx = 0, sw = 1.5) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${rx}" fill="${fill}" ${sk(sw)}/>`;
+const Ci = (cx, cy, r, fill, sw = 1.5) => `<circle cx="${cx}" cy="${cy}" r="${r}" fill="${fill}" ${sk(sw)}/>`;
+const Ln = (d, c, w) => `<path d="${d}" fill="none" stroke="${c}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round"/>`;
+const box = (x0, y0, x1, y1) => `M${x0} ${y0}H${x1}V${y1}H${x0}Z`;
+const rack = (x0, x1, y) => Rc(x0, y + 0.06, x1 - x0, 0.05, BLACK, 0.01, 0) + [x0 + 0.1, (x0 + x1) / 2, x1 - 0.1].map(x => Rc(x - 0.02, y, 0.04, 0.07, BLACK, 0, 0)).join("");
+const mirror = (x, y) => D(`M${x} ${y}L${x + 0.1} ${y}L${x + 0.08} ${y + 0.13}L${x - 0.03} ${y + 0.13}Z`, BLACK, 0);
+const handle = (x, y) => Rc(x, y, 0.1, 0.03, CHROME, 0.01, 0);
+const lamp = (x, y) => Ci(x, y, 0.09, CHROME) + Ci(x + 0.02, y, 0.05, LENS, 1);
+const snorkel = (d, hx, hy) => Ln(d, BLACK, 6) + Rc(hx, hy, 0.28, 0.12, BLACK, 0.04, 0);
 
-function truckSVG(c, label) {
-  const G = 134;
-  const { rear: x0, front: x1, belt: yb, sill: ys, roof: yr, hood, ws, rs = 0, r, wr, wf, rtl, rtr, paint, top = paint, windows = 2, lamp } = c;
-  const cab = x0;
-  const s = [];
-  s.push(`<circle cx="236" cy="58" r="48" fill="var(--sun)" opacity=".55"/>`);
-  s.push(`<ellipse cx="${(x0 + x1) / 2}" cy="${G + 1}" rx="${(x1 - x0) / 2 + 14}" ry="4" fill="${INK}" opacity=".18"/>`);
-  if (c.spare) s.push(`<rect x="${x0 - 10}" y="${yb + 1}" width="11" height="${ys - yb + 2}" rx="4" fill="#2a211b" stroke="${INK}" stroke-width="2"/>`);
-  s.push(`<path d="${rp(x0, yb, x1, ys, rtl, rtr, 6, 6)}" fill="${paint}" stroke="${INK}" stroke-width="2.5"/>`);
-  if (c.stripe) {
-    ["#e2a632", "#d6621d", "#a3361b"].forEach((col, i) => {
-      s.push(`<rect x="${x0 + 4}" y="${yb + 9 + i * 4.5}" width="${x1 - hood * 0.35 - x0 - 4}" height="3.4" fill="${col}"/>`);
-    });
-  }
-  const xw = y => (x1 - hood) - ws * (yb - y) / (yb - yr);
-  const xr = y => cab + rs * (yb - y) / (yb - yr);
-  s.push(`<polygon points="${x1 - hood},${yb} ${x1 - hood - ws},${yr} ${cab + rs},${yr} ${cab},${yb}" fill="${top}" stroke="${INK}" stroke-width="2.5" stroke-linejoin="round"/>`);
-  const ins = 6, gt = yr + ins, gb = yb - 4;
-  const gx = [xw(gb) - ins, xw(gt) - ins, xr(gt) + ins, xr(gb) + ins];
-  s.push(`<polygon points="${gx[0]},${gb} ${gx[1]},${gt} ${gx[2]},${gt} ${gx[3]},${gb}" fill="#9db5b0" stroke="${INK}" stroke-width="1.5" stroke-linejoin="round"/>`);
-  s.push(`<line x1="${gx[1] - 8}" y1="${gt + 4}" x2="${gx[1] - 20}" y2="${gb - 4}" stroke="#e8f0ec" stroke-width="3" opacity=".7"/>`);
-  const left = gx[3], right = gx[0];
-  for (let i = 1; i < windows; i++) {
-    const x = right - (right - left) * i / windows;
-    s.push(`<rect x="${x - 3}" y="${gt - 1}" width="6" height="${gb - gt + 2}" fill="${top}"/>`);
-    s.push(`<line x1="${x}" y1="${yb + 3}" x2="${x}" y2="${ys - 5}" stroke="${INK}" stroke-width="1.2" opacity=".55"/>`);
-  }
-  s.push(`<line x1="${x1 - hood - 2}" y1="${yb + 3}" x2="${x1 - hood - 2}" y2="${ys - 5}" stroke="${INK}" stroke-width="1.2" opacity=".55"/>`);
-  if (c.rack) {
-    const a = cab + rs + 6, b = x1 - hood - ws - 6;
-    s.push(`<rect x="${a}" y="${yr - 9}" width="${b - a}" height="3.5" rx="1" fill="${INK}"/>`);
-    [a + 6, (a + b) / 2, b - 6].forEach(x => s.push(`<rect x="${x - 1.5}" y="${yr - 6}" width="3" height="6" fill="${INK}"/>`));
-  }
-  [wr, wf].forEach(cx => {
-    const cy = G - r, R = r + 5, dy = ys - cy;
-    const dx = Math.sqrt(Math.max(R * R - dy * dy, 0));
-    s.push(`<path d="M${cx - dx} ${ys}A${R} ${R} 0 ${dy > 0 ? 1 : 0} 1 ${cx + dx} ${ys}Z" fill="var(--plate)" stroke="${INK}" stroke-width="2.5"/>`);
-    s.push(`<circle cx="${cx}" cy="${cy}" r="${r}" fill="#2a211b"/>`);
-    s.push(`<circle cx="${cx}" cy="${cy}" r="${r * 0.56}" fill="#d9cdb1" stroke="${INK}" stroke-width="1.5"/>`);
-    s.push(`<circle cx="${cx}" cy="${cy}" r="${r * 0.18}" fill="#857659"/>`);
-  });
-  s.push(`<rect x="${x1 - 4}" y="${ys - 13}" width="10" height="9" rx="2" fill="#3d3833" stroke="${INK}" stroke-width="1.5"/>`);
-  if (!c.spare) s.push(`<rect x="${x0 - 5}" y="${ys - 12}" width="8" height="8" rx="2" fill="#3d3833" stroke="${INK}" stroke-width="1.5"/>`);
-  if (lamp === "round") s.push(`<circle cx="${x1 - 2}" cy="${yb + 10}" r="5" fill="#f4e3a1" stroke="${INK}" stroke-width="1.5"/>`);
-  else s.push(`<rect x="${x1 - 8}" y="${yb + 5}" width="9" height="7" rx="1.5" fill="#f4e3a1" stroke="${INK}" stroke-width="1.5"/>`);
-  if (c.snorkel) {
-    const sx = x1 - hood + 3;
-    s.push(`<rect x="${sx}" y="${yr - 4}" width="5" height="${yb + 12 - yr + 4}" rx="2" fill="#2b2622"/>`);
-    s.push(`<rect x="${sx - 3}" y="${yr - 10}" width="11" height="7" rx="2.5" fill="#2b2622"/>`);
-  }
-  return `<svg viewBox="0 0 340 145" role="img" aria-label="${label}">${s.join("")}</svg>`;
+const MODELS = {
+  // FJ40 hardtop: 3.84 m long, 2.285 m wheelbase, white roof, flat-topped front guards, rear spare
+  "40": { ext: [-0.2, 3.82], paint: "#5f8fa3", sill: 0.62, wheels: [0.95, 3.22], r: 0.40, arch: 0.50, rim: "#e9e2cf",
+    body: "M0.04 0.62L0.04 1.14L2.52 1.14L2.56 1.18L3.50 1.13Q3.62 1.12 3.63 1.02L3.63 0.62Z",
+    upper: D("M0.04 1.14L0.04 1.76Q0.04 1.93 0.22 1.93L2.43 1.93L2.53 1.14Z", "#efe8d6") + D("M2.43 1.93L2.52 1.93L2.62 1.16L2.53 1.14Z", "#5f8fa3"),
+    glass: ["M1.92 1.22L2.45 1.22L2.38 1.82L1.92 1.82Z", box(0.36, 1.24, 1.78, 1.80), box(0.10, 1.30, 0.26, 1.76)],
+    lines: "M1.86 0.68V1.88M1.86 0.68H2.62M2.66 0.62Q2.66 1.03 2.92 1.03H3.60M0.14 1.88H2.40",
+    after: Rc(-0.2, 0.72, 0.2, 0.76, TYRE, 0.07) + Rc(3.58, 0.46, 0.24, 0.14, BLACK, 0.02, 0) + Rc(-0.04, 0.48, 0.18, 0.12, BLACK, 0.02, 0)
+      + lamp(3.62, 0.92) + Rc(3.46, 1.03, 0.1, 0.05, AMBER, 0.01, 1) + mirror(2.62, 1.42) + handle(1.94, 1.04) },
+  // HJ61 wagon: 4.75 m, 2.73 m wheelbase, flat roof, upright tailgate, decal stripes
+  "60": { ext: [-0.05, 4.85], paint: "#c08b4c", sill: 0.55, wheels: [1.24, 3.97], r: 0.39, arch: 0.48, flare: BLACK, flareW: 3, rim: "#cfc9b9",
+    body: "M0.04 0.55L0.04 1.70Q0.04 1.80 0.16 1.80L2.88 1.80L3.24 1.17L4.62 1.15Q4.72 1.14 4.72 1.04L4.72 0.55Z",
+    under: Rc(0.04, 1.02, 4.46, 0.035, "#e2a632", 0, 0) + Rc(0.04, 0.975, 4.46, 0.035, "#d6621d", 0, 0) + Rc(0.04, 0.93, 4.46, 0.035, "#a3361b", 0, 0),
+    glass: ["M2.36 1.24L3.10 1.24L2.84 1.72L2.36 1.72Z", box(1.56, 1.24, 2.26, 1.72), box(0.26, 1.24, 1.46, 1.72)],
+    lines: "M2.30 0.60V1.78M1.50 0.62V1.78M3.24 1.17V0.62M0.10 0.62V1.74M3.30 1.16L4.60 1.14",
+    after: rack(0.3, 2.7, 1.80) + mirror(3.18, 1.30) + Rc(4.62, 0.42, 0.22, 0.15, CHROME, 0.03) + Rc(-0.05, 0.44, 0.15, 0.13, CHROME, 0.03)
+      + lamp(4.68, 0.92) + handle(2.36, 1.06) + handle(1.56, 1.06) },
+  // VDJ78 Troop Carrier: 5.22 m, 2.98 m wheelbase, high roof, bonnet bulge, flares, bullbar, snorkel
+  "70": { ext: [-0.02, 5.36], paint: "#ebe4d2", sill: 0.60, wheels: [1.44, 4.42], r: 0.40, arch: 0.53, flare: BLACK, flareW: 6, rim: "#d9d6cc",
+    body: "M0.04 0.60L0.04 2.02Q0.04 2.10 0.14 2.10L3.02 2.10Q3.22 2.10 3.28 1.90L3.46 1.31L4.40 1.28L5.02 1.22Q5.12 1.21 5.12 1.10L5.12 0.60Z",
+    upper: D("M3.62 1.30L3.72 1.37L4.72 1.34L4.82 1.27Z", "#ebe4d2") + Rc(4.55, 1.33, 0.14, 0.035, BLACK, 0.01, 0),
+    glass: ["M2.62 1.38L3.36 1.38L3.22 1.84L2.62 1.84Z", box(0.32, 1.40, 1.36, 1.86), box(1.42, 1.40, 2.44, 1.86)],
+    lines: "M2.56 0.66V1.98M2.56 0.66H3.46M3.46 1.31V0.66M0.10 0.64V2.0M3.70 1.30L5.0 1.23",
+    after: Ln("M5.12 0.70L5.22 1.24L5.30 1.24L5.30 0.66", BLACK, 4) + Rc(5.08, 0.42, 0.28, 0.24, BLACK, 0.03, 0)
+      + snorkel("M3.56 1.18V1.40L3.36 2.02V2.10", 3.26, 2.05) + rack(0.15, 3.0, 2.10) + mirror(3.48, 1.46)
+      + lamp(5.08, 0.98) + Rc(-0.02, 0.44, 0.16, 0.14, BLACK, 0.02, 0) + handle(2.64, 1.12) + Rc(5.0, 1.12, 0.1, 0.05, AMBER, 0.01, 1) },
+  // HZJ80: 4.82 m, 2.85 m wheelbase, rounded nose, raked screen, grey lower body
+  "80": { ext: [-0.04, 4.84], paint: "#3f5a46", sill: 0.55, wheels: [1.17, 4.02], r: 0.39, arch: 0.50, flare: "#2f4535", flareW: 4, rim: "#cfcfc8",
+    body: "M0.04 0.55L0.04 1.10L0.10 1.74Q0.12 1.85 0.26 1.85L2.70 1.86Q2.78 1.86 2.82 1.80L3.24 1.20L4.50 1.07Q4.72 1.05 4.76 0.90L4.78 0.55Z",
+    under: Rc(0.04, 0.55, 4.74, 0.2, GREY, 0, 0),
+    glass: ["M2.36 1.26L3.10 1.26L2.78 1.74L2.36 1.74Z", box(1.56, 1.26, 2.28, 1.74), "M0.36 1.26L1.48 1.26L1.48 1.74L0.42 1.74Z"],
+    lines: "M2.30 0.60V1.82M1.50 0.62V1.82M3.24 1.20V0.62M0.06 0.98H4.66M3.30 1.19L4.48 1.08",
+    after: Rc(4.60, 0.86, 0.16, 0.1, LENS, 0.02) + Rc(4.48, 0.86, 0.1, 0.1, AMBER, 0.02) + Rc(4.55, 0.44, 0.29, 0.2, GREY, 0.05) + Rc(-0.04, 0.45, 0.2, 0.18, GREY, 0.04)
+      + snorkel("M3.36 1.15V1.30L2.96 1.88V1.96", 2.86, 1.91) + rack(0.3, 2.6, 1.86) + mirror(3.2, 1.32) + handle(2.36, 1.08) + handle(1.56, 1.08) },
+  // UZJ100: 4.89 m, 2.85 m wheelbase, longer sloping bonnet, swept headlamps, body-colour bumpers
+  "100": { ext: [-0.03, 4.92], paint: "#b3a68c", sill: 0.52, wheels: [1.19, 4.04], r: 0.39, arch: 0.50, flare: "#9a8e76", flareW: 4, rim: "#d4d3cc",
+    body: "M0.04 0.52L0.04 1.12L0.16 1.72Q0.20 1.83 0.36 1.83L2.60 1.84Q2.70 1.84 2.75 1.78L3.22 1.18L4.55 1.06Q4.82 1.04 4.86 0.88L4.88 0.52Z",
+    under: Rc(0.06, 0.80, 4.78, 0.06, GREY, 0, 0),
+    glass: ["M2.34 1.25L3.08 1.25L2.72 1.72L2.34 1.72Z", box(1.56, 1.25, 2.26, 1.72), "M0.42 1.25L1.48 1.25L1.48 1.72L0.52 1.72Z"],
+    lines: "M2.28 0.58V1.80M1.50 0.60V1.80M3.22 1.18V0.60M3.28 1.17L4.52 1.07",
+    after: D("M4.56 0.86L4.84 0.88L4.86 0.98L4.60 0.99Z", LENS, 1.5) + Rc(4.60, 0.40, 0.32, 0.26, "#b3a68c", 0.07) + Rc(-0.03, 0.42, 0.2, 0.22, "#b3a68c", 0.05)
+      + mirror(3.18, 1.30) + handle(2.34, 1.06) + handle(1.56, 1.06) },
+  // VDJ200: 4.95 m, 2.85 m wheelbase, tall body, high beltline, chrome grille, side steps
+  "200": { ext: [-0.03, 4.96], paint: "#615e58", sill: 0.50, wheels: [1.20, 4.05], r: 0.41, arch: 0.52, flare: "#4b4944", flareW: 4, rim: "#cfd0cc",
+    body: "M0.04 0.50L0.04 1.25L0.12 1.80Q0.16 1.92 0.32 1.92L2.58 1.92Q2.68 1.92 2.74 1.85L3.20 1.26L4.62 1.16Q4.86 1.14 4.90 1.02L4.92 0.50Z",
+    glass: ["M2.32 1.33L3.06 1.33L2.70 1.80L2.32 1.80Z", box(1.56, 1.33, 2.24, 1.80), "M0.40 1.40L1.48 1.33L1.48 1.80L0.48 1.80Z"],
+    lines: "M2.26 0.56V1.88M1.50 0.58V1.88M3.20 1.26V0.58M3.26 1.25L4.60 1.16",
+    after: Rc(4.70, 0.92, 0.2, 0.16, LENS, 0.03) + Rc(4.88, 0.62, 0.05, 0.42, CHROME, 0.01) + Rc(4.62, 0.40, 0.32, 0.28, "#615e58", 0.07) + Rc(-0.03, 0.42, 0.2, 0.24, "#615e58", 0.05)
+      + Rc(1.62, 0.40, 2.0, 0.07, BLACK, 0.02, 0) + mirror(3.16, 1.38) + handle(2.32, 1.14) + handle(1.56, 1.14) },
+  // FJA300: 4.98 m, 2.85 m wheelbase, flat bonnet, square nose, kinked rear quarter glass, black flares
+  "300": { ext: [-0.03, 5.02], paint: "#6d2a22", sill: 0.50, wheels: [1.23, 4.08], r: 0.41, arch: 0.53, flare: BLACK, flareW: 6, rim: "#bdbdb6",
+    body: "M0.04 0.50L0.04 1.28L0.08 1.80Q0.10 1.92 0.26 1.92L2.52 1.92Q2.62 1.92 2.68 1.85L3.14 1.28L4.92 1.24Q4.98 1.24 4.98 1.14L4.98 0.50Z",
+    glass: ["M2.30 1.35L3.00 1.35L2.64 1.80L2.30 1.80Z", box(1.54, 1.35, 2.22, 1.80), "M0.30 1.52L0.62 1.52L0.78 1.35L1.46 1.35L1.46 1.80L0.34 1.80Z"],
+    lines: "M2.24 0.56V1.88M1.48 0.58V1.88M3.14 1.28V0.58M3.20 1.27L4.90 1.24",
+    after: Rc(4.78, 1.04, 0.2, 0.09, LENS, 0.02) + Rc(4.94, 0.62, 0.06, 0.56, BLACK, 0.01, 0) + Rc(4.70, 0.40, 0.32, 0.24, BLACK, 0.05, 0) + Rc(-0.03, 0.42, 0.2, 0.24, BLACK, 0.04, 0)
+      + Rc(1.66, 0.40, 1.98, 0.07, BLACK, 0.02, 0) + mirror(3.10, 1.42) + handle(2.30, 1.16) + handle(1.54, 1.16) }
+};
+
+function truckSVG(m, label) {
+  const S = 55, G = 134;
+  const [x0, x1] = m.ext;
+  const [wr, wf] = m.wheels;
+  const ox = ((340 - (x1 - x0) * S) / 2 - x0 * S).toFixed(1);
+  const parts = [
+    D(m.body, m.paint),
+    m.under || "",
+    m.upper || "",
+    ...m.glass.map(d => D(d, GLASS, 1.5)),
+    `<path d="${m.lines}" fill="none" stroke="${INK}" stroke-width="1.2" opacity=".55"/>`,
+    ...[wr, wf].map(x => Ci(x, m.r, m.arch, "var(--plate)", m.flare ? 0 : 2)
+      + (m.flare ? `<circle cx="${x}" cy="${m.r}" r="${m.arch}" fill="none" stroke="${m.flare}" stroke-width="${m.flareW}"/>` : "")),
+    Rc(x0 - 1, -0.5, x1 - x0 + 2, m.sill + 0.5, "var(--plate)", 0, 0),
+    Rc(wr, m.sill - 0.14, wf - wr, 0.14, "#3a2d22", 0, 0),
+    `<ellipse cx="${(x0 + x1) / 2}" cy="0" rx="${(x1 - x0) / 2 + 0.1}" ry="0.06" fill="${INK}" opacity=".18"/>`,
+    ...[wr, wf].map(x => Ci(x, m.r, m.r, TYRE, 0) + Ci(x, m.r, m.r * 0.56, m.rim) + Ci(x, m.r, m.r * 0.16, "#7d705a", 0)),
+    m.after || ""
+  ];
+  return `<svg class="truck" viewBox="0 0 340 145" role="img" aria-label="${label}"><circle cx="255" cy="42" r="34" fill="var(--sun)" opacity=".55"/><g transform="translate(${ox} ${G}) scale(${S} ${-S})">${parts.join("")}</g></svg>`;
 }
 
 const fmtPower = (kw, unit) => unit === "hp" ? `${Math.round(kw * 1.341)} hp` : `${kw} kW`;
@@ -455,10 +489,10 @@ const fmtPower = (kw, unit) => unit === "hp" ? `${Math.round(kw * 1.341)} hp` : 
 function render(unit) {
   document.getElementById("series-list").innerHTML = SERIES.map(s => `
     <article class="series">
-      <div class="plate">${truckSVG(s.art, `Illustration of a ${s.name} Land Cruiser`)}</div>
+      <div class="plate">${truckSVG(MODELS[s.id], `Illustration of a ${s.name} Land Cruiser`)}</div>
       <div class="series-body">
         <div class="series-title">
-          <div class="badge" aria-hidden="true">${s.id}</div>
+          <div class="badge${s.id.length > 2 ? " wide" : ""}" aria-hidden="true">${s.id}</div>
           <div>
             <h3>${s.name}</h3>
             <div class="years">${s.years}</div>
@@ -485,7 +519,7 @@ function render(unit) {
     </tr>`).join("");
 }
 
-document.querySelector("[data-hero]").innerHTML = truckSVG(SERIES[2].art, "Illustration of a 70 Series Troop Carrier with snorkel and roof rack");
+document.querySelector("[data-hero]").innerHTML = truckSVG(MODELS["70"],"Illustration of a 70 Series Troop Carrier with snorkel and roof rack");
 
 let unit = "kW";
 try { unit = localStorage.getItem("cc-unit") || "kW"; } catch (e) {}
